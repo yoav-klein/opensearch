@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: opensearch-dashboards
+  namespace: storage
+spec:
+  ports:
+  - targetPort: 5601
+    port: 5601
+    name: opensearch
+  selector:
+    app: opensearch-dashboards
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: opensearch-dashboards
+  namespace: storage
+spec:
+  selector:
+    matchLabels:
+      app: opensearch-dashboards
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: opensearch-dashboards
+    spec:
+      containers:
+      - image: opensearchproject/opensearch-dashboards:1.3.9
+        name: opensearch-dashboards
+        env:
+        - name: OPENSEARCH_HOSTS
+          value: '["http://opensearch.storage.svc.cluster.local:9200"]' # change to HTTPS?
+        - name: DISABLE_SECURITY_DASHBOARDS_PLUGIN
+          value: "true"
+            #        command: ["sleep", "3600"]

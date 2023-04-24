@@ -1,0 +1,18 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: test
+spec:
+  containers:
+    - image: yoavklein3/net-tools:latest
+      name: test
+      command: ["sleep", "3600"]
+      volumeMounts:
+        - mountPath: /tmp/var/log
+          name: varlog
+  volumes:
+    - hostPath:
+        path: /var/log
+      name: varlog
+
+
