@@ -2,7 +2,7 @@ version: '3'
 services:
   opensearch-node: # This is also the hostname of the container within the Docker network (i.e. https://opensearch-node1/)
     image: opensearchproject/opensearch:latest # Specifying the latest available image - modify if you want a specific version
-    container_name: opensearch-node1
+    container_name: opensearch-node
     environment:
       - cluster.name=opensearch-cluster # Name the cluster
       - node.name=opensearch-node # Name the node that will run in this container
@@ -32,7 +32,7 @@ services:
     expose:
       - "5601" # Expose port 5601 for web access to OpenSearch Dashboards
     environment:
-      OPENSEARCH_HOSTS: '["https://opensearch-node1:9200","https://opensearch-node2:9200"]' # Define the OpenSearch nodes that OpenSearch Dashboards will query
+      OPENSEARCH_HOSTS: '["https://opensearch-node:9200"]' # Define the OpenSearch nodes that OpenSearch Dashboards will query
     networks:
       - opensearch-net
 
