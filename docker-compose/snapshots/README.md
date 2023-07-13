@@ -1,21 +1,35 @@
-# With security
+# Snapshots - filesystem
 ---
 
-In this case, we run OpenSearch and OpenSearch Dasboards with security plugin disabled.
+In this example, we demonstrate how to create and use a snapshot repository of type filesystem.
 
-With security plugin disabled, you don't need to authenticate to the cluster, and it runs with HTTP
-rather than HTTPS
+Reminder: In order to take snapshots, you need to create a snapshot _repository_. This may be a filesystem,
+a S3 bucket, or few other options.
+
+We use the filesystem type repository which is backed by the `snapshots` directory.
+
+## NOTES
+1. in `opensearch.yml` - the Opensearch configuration file - we add the `path.repo` field.
+2. in `docker-compose.yaml` - we add a mount from `./snapshots:/mnt/snapshots`
+3. then, to create the repository, we use the `create_repository` function, which creates a new repository object
+and maps it to a path.
+
 
 ## Usage
 
-Run
+1. Run
 ```
 $ docker compose up [-d]
 ```
 
-Test connection to OpenSearch:
+2. Create the repository:
 ```
-$ curl http://localhost:5601 -u 'admin:admin'
+$ source functions.sh
+$ create_repository
 ```
 
-Test connection to OpenSearch Dashboards. Browse to `http://<ip>:5601`
+3. Take a snapshot
+```
+$ take_snapshot
+```
+
