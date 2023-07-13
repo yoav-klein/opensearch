@@ -13,7 +13,7 @@ We use the filesystem type repository which is backed by the `snapshots` directo
 2. in `docker-compose.yaml` - we add a mount from `./snapshots:/mnt/snapshots`
 3. then, to create the repository, we use the `create_repository` function, which creates a new repository object
 and maps it to a path.
-
+4. We removed the mounting of the opensearch data to a volume. This is to demonstrate the restoring.
 
 ## Usage
 
@@ -28,8 +28,26 @@ $ source functions.sh
 $ create_repository
 ```
 
-3. Take a snapshot
+3. Create some content:
+```
+$ create_content
+```
+
+4. Take a snapshot
 ```
 $ take_snapshot
 ```
 
+Now, take the cluster down and up again:
+```
+$ docker compose down
+...
+$ docker compose up -d
+```
+
+Currently, your cluster should not have the `books` index.
+
+6. Restore the books index:
+```
+$ restore
+```
