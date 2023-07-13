@@ -15,7 +15,7 @@ $ docker compose up [-d]
 
 Test connection to OpenSearch:
 ```
-$ curl http://localhost:5601 -u 'admin:admin'
+$ curl http://localhost:9200
 ```
 
 Test connection to OpenSearch Dashboards. Browse to `http://<ip>:5601`
