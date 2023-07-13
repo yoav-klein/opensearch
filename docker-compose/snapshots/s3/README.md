@@ -15,6 +15,10 @@ _Prerequisites_
 
 ### Create a bucket
 Create a S3 bucket.
+```
+$ source funcations.sh
+$ create_bucket
+```
 
 ### Dockerfile
 We need to set the AWS credentials in the Dockerfile in `opensearch-docker`. Make
