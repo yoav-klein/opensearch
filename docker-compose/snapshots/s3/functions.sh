@@ -1,36 +1,16 @@
 
-setup_iam() {
-    # create IAM role
-    echo "== create policy"
-    aws iam create-policy --policy-name OpensearchSnapshotPolicy --policy-document file://policy.json
 
-    current_user=$(aws sts get-caller-identity --query='Arn' --output text)
-    echo "== current user: $current_user"
-    sed "s@<user-arn>@$current_user@" trust-policy.json.template > trust-policy.json
-    
-    echo "== create role"
-    aws iam create-role --role-name OpensearchSnapshotRole --assume-role-policy-document file://trust-policy.json
-    policy_arn=$(aws iam list-policies --query "Policies[?PolicyName=='OpensearchSnapshotPolicy'].Arn" --output text)
-
-    echo "== attach them"
-    aws iam attach-role-policy --role-name OpensearchSnapshotRole --policy-arn $policy_arn
-    
-
-    role_arn=$(aws iam list-roles --query='Roles[?RoleName==`OpensearchSnapshotRole`].Arn' --output text)
-    aws sts assume-role --role-arn $role_arn
-
-    # replace the values in the Dockerfile
+create_bucket() {
+    aws s3api create-bucket --bucket yoav-opensearch-snapshot
 }
 
 
 create_repo() {
-
-    chmod 777 snapshots
     curl -X POST -H "Content-Type: application/json" http://localhost:9200/_snapshot/my-repository -d \
 '{
-  "type": "fs",
+  "type": "s3",
   "settings": {
-    "location": "/mnt/snapshots"
+    "bucket": "yoav-opensearch-snapshot"
   }
 }'
 

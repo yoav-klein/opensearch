@@ -9,23 +9,28 @@ a S3 bucket, or few other options.
 _Prerequisites_
 1. We need to build the opensearch docker image to adjust it to work with S3 bucket.
 2. Create a S3 bucket
-3. Create an IAM policy to allow an IAM identity (user or role) to write to the S3 bucket.
 
 
+## Setup
+
+### Create a bucket
+Create a S3 bucket.
+
+### Dockerfile
+We need to set the AWS credentials in the Dockerfile in `opensearch-docker`. Make
+sure that the IAM user to whom these credentials belong to has access to the bucket.
+For simplicity, just use the same user you used to create the bucket.
 
 
 ## NOTES
-1. in `opensearch.yml` - the Opensearch configuration file - we add the `path.repo` field.
-2. in `docker-compose.yaml` - we add a mount from `./snapshots:/mnt/snapshots`
-3. then, to create the repository, we use the `create_repository` function, which creates a new repository object
-and maps it to a path.
-4. We removed the mounting of the opensearch data to a volume. This is to demonstrate the restoring.
+1. We removed the mounting of the opensearch data to a volume. This is to demonstrate the restoring.
+2. Run the docker compose up with the --build flag.
 
 ## Usage
 
 1. Run
 ```
-$ docker compose up [-d]
+$ docker compose up -d --build
 ```
 
 2. Create the repository:
