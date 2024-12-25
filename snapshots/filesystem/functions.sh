@@ -21,9 +21,9 @@ remove_repo() {
 }
 
 take_snapshot() {
-    curl -X PUT http://localhost:9200/_snapshot/my-repository/2
+    curl -X PUT http://localhost:9200/_snapshot/my-repository/4
 }
 
 restore() {
-    curl -X POST localhost:9200/_snapshot/my-repository/2/_restore -H "Content-Type: application/json" -d '{"indices": ["books"]}'
+    curl -X POST localhost:9200/_snapshot/my-repository/4/_restore -H "Content-Type: application/json" -d '{"indices": "products"}'
 }
