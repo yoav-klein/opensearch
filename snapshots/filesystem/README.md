@@ -33,10 +33,14 @@ $ create_repository
 $ create_content
 ```
 
+This will create some indices with some data.
+
 4. Take a snapshot
 ```
 $ take_snapshot
 ```
+
+This creates a snapshot with all the indices. You can also specify the indices you want to take snapshot of.
 
 Now, take the cluster down and up again:
 ```
