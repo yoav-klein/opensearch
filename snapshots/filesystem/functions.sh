@@ -13,11 +13,7 @@ create_repo() {
 }
 
 create_content() {
-    curl -X PUT http://localhost:9200/books
-    curl -X POST http://localhost:9200/books/_doc -H "Content-Type: application/json" -d '{
-    "name": "1984",
-    "author": "George Orwell"
-    }'
+    curl -X POST "http://localhost:9200/_bulk" -H "Content-Type: application/json" --data-binary @data.json
 }
 
 remove_repo() {

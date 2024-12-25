@@ -1,0 +1,17 @@
+{ "index": { "_index": "products", "_id": "1" } }
+{ "name": "Laptop", "category": "Electronics", "price": 1200, "stock": 50 }
+{ "index": { "_index": "products", "_id": "2" } }
+{ "name": "Smartphone", "category": "Electronics", "price": 800, "stock": 200 }
+{ "index": { "_index": "customers", "_id": "1" } }
+{ "first_name": "John", "last_name": "Doe", "email": "john.doe@example.com", "loyalty_points": 120 }
+{ "index": { "_index": "customers", "_id": "2" } }
+{ "first_name": "Jane", "last_name": "Smith", "email": "jane.smith@example.com", "loyalty_points": 150 }
+{ "index": { "_index": "orders", "_id": "1" } }
+{ "order_id": "ORD001", "customer_id": "1", "total": 200, "status": "Shipped" }
+{ "index": { "_index": "orders", "_id": "2" } }
+{ "order_id": "ORD002", "customer_id": "2", "total": 1500, "status": "Processing" }
+{ "index": { "_index": "reviews", "_id": "1" } }
+{ "product_id": "1", "customer_id": "2", "rating": 4, "review": "Great laptop, but a bit pricey." }
+{ "index": { "_index": "reviews", "_id": "2" } }
+{ "product_id": "2", "customer_id": "1", "rating": 5, "review": "Excellent phone, highly recommend!" }
+
